@@ -1,2 +1,2 @@
-# Coding Test
- 알고리즘 공부
+# CodingTest
+ Coding test algorithms
