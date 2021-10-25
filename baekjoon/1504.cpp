@@ -19,11 +19,13 @@ void dijkstra(int start, int value[], int len) {
         int current = pq.top().first;
         int distance = -pq.top().second;
         pq.pop();
-        if(value[current] < distance) continue;
+        if(value[current] < distance) {
+            continue;
+        }
         for(int i=0; i < v[current].size(); i++) {
             int next = v[current][i].first;
             int next_distance = distance + v[current][i].second;
-            if(value[next] > v[current][i].second + distance) {
+            if(value[next] > next_distance) {
                 value[next] = next_distance;
                 pq.push(make_pair(next, -next_distance));
             }
