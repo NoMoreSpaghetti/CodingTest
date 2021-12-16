@@ -46,12 +46,12 @@ int unique_array(int ary[], int size) {
     return end;
 }
 
-void recursive(int m, int k, string s) {
+void recursive_print(int m, int k, string s) {
     for(int i=k; i < N; i++) {
         if(m == 1) {
             cout << s << nums[i] << '\n';
         } else {
-            recursive(m - 1, i, s + to_string(nums[i]) + ' ');
+            recursive_print(m - 1, i, s + to_string(nums[i]) + ' ');
         }
     }
 }
@@ -71,5 +71,5 @@ int main() {
     N = unique_array(nums, N);
 
     string s;
-    recursive(M, 0, s);
+    recursive_print(M, 0, s);
 }
