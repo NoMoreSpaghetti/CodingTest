@@ -7,7 +7,7 @@ int dy[] = {-1, -1, 0, 1, 1, 1, 0, -1};
 int dx[] = {0, 1, 1, 1, 0, -1, -1, -1};
 int opposite_d[] = {4, 5, 6, 7, 0, 1, 2, 3};
 
-bool is_valid_move(int y, int x) {
+bool is_closed_point(int y, int x) {
     if(y >= 0 && y < 3 && x >= 0 && x < 3) {
         return true;
     }
@@ -22,7 +22,7 @@ int count_stone(int y, int x, int d) {
     int new_y = y + dy[d];
     int new_x = x + dx[d];
     int num_stone = 1;
-    while(is_valid_move(new_y, new_x) && map[new_y][new_x] == cur_player) {
+    while(is_closed_point(new_y, new_x) && map[new_y][new_x] == cur_player) {
         num_stone++;
         new_y += dy[d];
         new_x += dx[d];
