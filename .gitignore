@@ -12,6 +12,7 @@
 *.json
 .vscode
 *.exe
+Project Euler/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
