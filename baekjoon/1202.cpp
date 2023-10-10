@@ -1,56 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#define SWAP(type, a, b) do{type temp = a; a = b; b = temp;} while(0);
+#include <algorithm>
 using namespace std;
 
-int N, K, m, v;
-int C[300000];
-int dp[300000];
-priority_queue<pair<int, int>> jewels;
-priority_queue<int> value_q;
-
-int partition(int ary[], int left, int right) {
-    int &p = ary[right];
-    int low = left - 1;
-    for(int high = left; high < right; high++) {
-        if(ary[high] < p) {
-            low++;
-            SWAP(int, ary[low], ary[high]);
-        }
-    }
-    SWAP(int, ary[low + 1], ary[right]);
-
-    return low + 1;
-}
-
-void quick_sort(int ary[], int left, int right) {
-    if(left < right) {
-        int p = partition(ary, left, right);
-        quick_sort(ary, left, p - 1);
-        quick_sort(ary, p + 1, right);
-    }
-}
-
-long long get_max_value() {
-    long long value = 0;
-    for(int i=0; i < K; i++) {
-        while(!jewels.empty()) {
-            pair<int, int> jewel = jewels.top();
-            if(-jewel.first > C[i]) {
-                break;
-            } else {
-                jewels.pop();
-                value_q.push(jewel.second);
-            }
-        }
-
-        if(!value_q.empty()) {
-            value += value_q.top();
-            value_q.pop();
-        }
-    }
-    return value;
+bool cmp(pair<int, int> a, pair<int, int> b) {
+    return a.first < b.first;
 }
 
 int main() {
@@ -58,15 +13,38 @@ int main() {
     cin.tie(NULL);
     cout.tie(NULL);
 
+    int N, K, m, v, c;
     cin >> N >> K;
+
+    vector<int> backpacks(K, 0);
+    vector<pair<int, int>> jewels(N, {0, 0});
+
     for(int n=0; n < N; n++) {
         cin >> m >> v;
-        jewels.push({-m, v});
-    }
-    for(int k=0; k < K; k++) {
-        cin >> C[k];
+        jewels[n] = {m, v};
     }
 
-    quick_sort(C, 0, K - 1);
-    cout << get_max_value() << '\n';
+    for(int k=0; k < K; k++) {
+        cin >> c;
+        backpacks[k] = c;
+    }
+
+    sort(jewels.begin(), jewels.end(), cmp);
+    sort(backpacks.begin(), backpacks.end());
+
+    long long sum = 0;
+    int jewel_idx = 0;
+    priority_queue<int> pq;
+    for(auto& c: backpacks) {
+        for(; jewel_idx < N && jewels[jewel_idx].first <= c; jewel_idx++) {
+            pq.push(jewels[jewel_idx].second);
+        }
+
+        if(!pq.empty()) {
+            sum += pq.top();
+            pq.pop();
+        }
+    }
+
+    cout << sum << '\n';
 }
