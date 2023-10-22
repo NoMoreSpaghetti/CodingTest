@@ -9,8 +9,8 @@ int main() {
     cout.tie(NULL);
 
     int N;
-    bool exists[MAX_NUM] = {0};
-    int scores[MAX_NUM] = {0};
+    bool exists[MAXNUM] = {0};
+    int scores[MAXNUM] = {0};
     cin >> N;
 
     vector<int> players(N, -1);
@@ -21,7 +21,7 @@ int main() {
 
     for(int i=0; i < N; i++) {
         int num = players[i] * 2;
-        while(num < MAX_NUM) {
+        while(num < MAXNUM) {
             if(exists[num]) {
                 scores[num]--;
                 scores[players[i]]++;
