@@ -11,17 +11,17 @@ vector<pair<int, int>> planets[3];
 int roots[100000];
 int ranks[100000] = {0};
 
-int my_find(int x) {
+int find_root(int x) {
     if(roots[x] == x) {
         return x;
     } else {
-        return roots[x] = my_find(roots[x]);
+        return roots[x] = find_root(roots[x]);
     }
 }
 
 void my_union(int x, int y) {
-    x = my_find(x);
-    y = my_find(y);
+    x = find_root(x);
+    y = find_root(y);
 
     if(x == y) {
         return;
@@ -57,7 +57,7 @@ long long kruskal() {
         int p1 = get<1>(weights[i]);
         int p2 = get<2>(weights[i]);
 
-        if(my_find(p1) != my_find(p2)) {
+        if(find_root(p1) != find_root(p2)) {
             my_union(p1, p2);
             ans += weight;
         }

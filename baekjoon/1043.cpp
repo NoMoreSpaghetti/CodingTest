@@ -7,11 +7,11 @@ using namespace std;
 int root[51];
 int node_rank[51];
 
-int my_find(int x) {
+int find_root(int x) {
     if(root[x] == x) {
         return x;
     } else {
-        int r = my_find(root[x]);
+        int r = find_root(root[x]);
         if(r == 0) {
             root[x] = 0;
         } else {
@@ -22,8 +22,8 @@ int my_find(int x) {
 }
 
 void my_union(int x, int y) {
-    x = my_find(x);
-    y = my_find(y);
+    x = find_root(x);
+    y = find_root(y);
 
     if(x == y) {
         return;
@@ -78,7 +78,7 @@ int main() {
 
     int cnt = 0;
     for(int m=1; m <= M; m++) {
-        if(my_find(first_of_party[m]) != 0) {
+        if(find_root(first_of_party[m]) != 0) {
             cnt++;
         }
     }

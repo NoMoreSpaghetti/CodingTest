@@ -7,19 +7,19 @@ int n, m;
 int root[500000];
 int node_rank[500000] = {0};
 
-int my_find(int x) {
+int find_root(int x) {
     if(root[x] == x) {
         return x;
     } else {
-        int r = my_find(root[x]);
+        int r = find_root(root[x]);
         root[x] = r;
         return root[x];
     }
 }
 
 bool my_union(int x, int y) {
-    x = my_find(x);
-    y = my_find(y);
+    x = find_root(x);
+    y = find_root(y);
 
     if(x == y) {
         return true;

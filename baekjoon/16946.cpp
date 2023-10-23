@@ -14,17 +14,17 @@ int ranks[1000000] = {0};
 int d_y[] = {-1, 0, 1, 0};
 int d_x[] = {0, 1, 0, -1};
 
-int my_find(int num) {
+int find_root(int num) {
     if(roots[num] == num) {
         return num;
     } else {
-        return roots[num] = my_find(roots[num]);
+        return roots[num] = find_root(roots[num]);
     }
 }
 
 void my_union(int x, int y) {
-    x = my_find(x);
-    y = my_find(y);
+    x = find_root(x);
+    y = find_root(y);
 
     if(x == y) {
         return;
@@ -64,7 +64,7 @@ void dfs(int y, int x) {
         }
     }
 
-    sizes[my_find(start_idx)] = num;
+    sizes[find_root(start_idx)] = num;
 }
 
 int main() {
@@ -99,7 +99,7 @@ int main() {
                     int new_x = j + d_x[k];
                     if(new_y >= 0 && new_y < N && new_x >= 0 && new_x < M) {
                         if(map[new_y][new_x] == 0) {
-                            closed_groups.push_back(my_find(new_y * M + new_x));
+                            closed_groups.push_back(find_root(new_y * M + new_x));
                         }
                     }
                 }

@@ -4,15 +4,15 @@ using namespace std;
 int N, M;
 int roots[1000000];
 
-int my_find(int num) {
+int find_root(int num) {
     if(roots[num] == -1 || roots[num] == num) {
         return num;
     }
-    return roots[num] = my_find(roots[num]);
+    return roots[num] = find_root(roots[num]);
 }
 
 bool simple_union(int new_x, int p) {
-    p = my_find(p);
+    p = find_root(p);
     roots[new_x] = p;
     if(p == new_x) {
         return true;
