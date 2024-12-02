@@ -40,6 +40,6 @@ int main() {
             sum = 0;
         }
 
-        cout << "case #" << t << ": " << y << '\n';
+        cout << "Case #" << t << ": " << y << '\n';
     }
 }

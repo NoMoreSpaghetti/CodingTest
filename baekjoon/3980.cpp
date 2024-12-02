@@ -6,7 +6,7 @@ int N = 11;
 vector<vector<int>> vec;
 int ans = 0;
 
-void recursive(int cur, int filled_bit, int sum) {
+void Recursive(int cur, int filled_bit, int sum) {
     if(cur == 11) {
         ans = max(ans, sum);
         return;
@@ -14,7 +14,7 @@ void recursive(int cur, int filled_bit, int sum) {
 
     for(int i=0; i < N; i++) {
         if(vec[cur][i] != 0 && (filled_bit & (1 << i)) == 0) {
-            recursive(cur + 1, filled_bit | (1 << i), sum + vec[cur][i]);
+            Recursive(cur + 1, filled_bit | (1 << i), sum + vec[cur][i]);
         }
     }
 }
@@ -36,7 +36,7 @@ int main() {
                 cin >> vec[i][j];
             }
         }
-        recursive(0, 0, 0);
+        Recursive(0, 0, 0);
         cout << ans << '\n';
     }
 }

@@ -6,22 +6,6 @@ using namespace std;
 int N;
 vector<int> nums;
 
-// int solution(vector<int>& selected_nums, int idx) {
-//     if(selected_nums.size() == 4) {
-//         return abs(selected_nums[0] + selected_nums[3] - selected_nums[1] - selected_nums[2]);
-//     }
-
-//     int return_val = INT32_MAX;
-//     for(int i=idx; i < N; i++) {
-//         selected_nums.push_back(nums[i]);
-//         int 
-//         return_val = min(return_val, solution(selected_nums, i + 1));
-//         selected_nums.pop_back();
-//     }
-
-//     return return_val;
-// }
-
 int solution() {
     int ans = INT32_MAX;
 
